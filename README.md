@@ -96,8 +96,6 @@ The 4naly3er report can be found [here](https://github.com/code-423n4/2024-11-ch
   * There is no longer an official API that returns all supported tokens for a given destination in 1 call.
   * One should iterate through tokens via `getAllConfiguredTokens` in TokenAdminRegistry and then call `isSupportedChain` on its token pool.
 
-✅ SCOUTS: Please format the response above 👆 so its not a wall of text and its readable.
-
 # Overview
 
 [ ⭐️ SPONSORS: add info here ]
