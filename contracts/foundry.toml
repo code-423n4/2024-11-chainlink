@@ -1,10 +1,12 @@
 [profile.default]
 auto_detect_solc = true
 optimizer = true
-optimizer_runs = 1_000_000
+solc_version = '0.8.24'
+src = 'src/ccip'
+test = 'src/ccip/test'
+optimizer_runs = 500
+evm_version = 'paris'
 
-src = 'src/'
-test = 'test/'
 out = 'foundry-artifacts'
 cache_path = 'foundry-cache'
 libs = ['node_modules']
@@ -21,13 +23,3 @@ tab_width = 2
 multiline_func_header = "params_first"
 sort_imports = true
 single_line_statement_blocks = "preserve"
-
-[profile.ccip]
-solc_version = '0.8.24'
-src = 'src/v0.8/ccip'
-test = 'src/v0.8/ccip/test'
-optimizer_runs = 500
-evm_version = 'paris'
-
-
-# See more config options https://github.com/foundry-rs/foundry/tree/master/config
