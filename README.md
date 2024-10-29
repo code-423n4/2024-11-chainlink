@@ -261,9 +261,9 @@ Prerequisites:
 
 * cd contracts/
 * pnpm install
-* make foundry
-* FOUNDRY_PROFILE=ccip forge test // runts tests
-* FOUNDRY_PROFILE=ccip make snapshot
+* foundryup --version nightly-3ff3d0562215bca620e07c5c4c154eec8da0f04b
+* forge test
+* make snapshot
 
 ✅ SCOUTS: Please format the response above 👆 using the template below👇
 
