@@ -352,7 +352,6 @@ contract OnRamp_forwardFromRouter is OnRampSetup {
   // @TODO Temporarily setting lower fuzz run as 256 triggers snapshot gas off by 1 error.
   // https://github.com/foundry-rs/foundry/issues/5689
   /// forge-dynamicConfig: default.fuzz.runs = 32
-  /// forge-dynamicConfig: ccip.fuzz.runs = 32
   function test_Fuzz_ForwardFromRouter_Success(address originalSender, address receiver, uint96 feeTokenAmount) public {
     // To avoid RouterMustSetOriginalSender
     vm.assume(originalSender != address(0));

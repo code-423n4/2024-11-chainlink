@@ -2288,7 +2288,6 @@ contract OffRamp_getExecutionState is OffRampSetup {
     s_differentialExecutionState;
 
   /// forge-config: default.fuzz.runs = 32
-  /// forge-config: ccip.fuzz.runs = 32
   function test_Fuzz_Differential_Success(
     uint64 sourceChainSelector,
     uint16[500] memory seqNums,
@@ -2975,8 +2974,7 @@ contract OffRamp_releaseOrMintTokens is OffRampSetup {
     );
   }
 
-  /// forge-config: default.fuzz.runs = 32
-  /// forge-config: ccip.fuzz.runs = 1024
+  /// forge-config: default.fuzz.runs = 1024
   // Uint256 gives a good range of values to test, both inside and outside of the eth address space.
   function test_Fuzz__releaseOrMintTokens_AnyRevertIsCaught_Success(
     address destPool
@@ -3129,7 +3127,6 @@ contract OffRamp_applySourceChainConfigUpdates is OffRampSetup {
 
   // Setting lower fuzz run as 256 runs was sometimes resulting in flakes.
   /// forge-config: default.fuzz.runs = 32
-  /// forge-config: ccip.fuzz.runs = 32
   function test_Fuzz_applySourceChainConfigUpdate_Success(
     OffRamp.SourceChainConfigArgs memory sourceChainConfigArgs
   ) public {
