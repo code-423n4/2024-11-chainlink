@@ -13,3 +13,4 @@ foundry-cache
 foundry-artifacts
 
 .openzeppelin
+.gas-snapshot
