@@ -220,33 +220,14 @@ Prerequisites:
   * node 20.13.1
   * pnpm 9.4.0
   * foundryup (https://book.getfoundry.sh/getting-started/installation)\
-  * make
 
 * cd contracts/
 * pnpm install
-* make foundry
-* FOUNDRY_PROFILE=ccip forge test // runts tests
-* FOUNDRY_PROFILE=ccip make snapshot
+* foundryup --version nightly-3ff3d0562215bca620e07c5c4c154eec8da0f04b
+* forge test
+* forge snapshot
 
 ✅ SCOUTS: Please format the response above 👆 using the template below👇
-
-```bash
-git clone https://github.com/code-423n4/2023-08-arbitrum
-git submodule update --init --recursive
-cd governance
-foundryup
-make install
-make build
-make sc-election-test
-```
-To run code coverage
-```bash
-make coverage
-```
-To run gas benchmarks
-```bash
-make gas
-```
 
 ✅ SCOUTS: Add a screenshot of your terminal showing the gas report
 ✅ SCOUTS: Add a screenshot of your terminal showing the test coverage
