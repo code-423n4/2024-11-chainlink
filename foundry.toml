@@ -1,0 +1,24 @@
+[profile.default]
+auto_detect_solc = true
+optimizer = true
+solc_version = '0.8.24'
+src = 'contracts/src/ccip'
+test = 'contracts/src/ccip/test'
+optimizer_runs = 500
+evm_version = 'paris'
+
+out = 'contracts/foundry-artifacts'
+cache_path = 'contracts/foundry-cache'
+bytecode_hash = "none"
+ffi = false
+
+# default is zero, using a non-zero amount enables us to test e.g. billing based on gas prices.
+gas_price = 1
+block_timestamp = 1234567890
+block_number = 12345
+
+[fmt]
+tab_width = 2
+multiline_func_header = "params_first"
+sort_imports = true
+single_line_statement_blocks = "preserve"
