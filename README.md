@@ -97,7 +97,7 @@ Another goal is to convert CCIP v1.6 contracts to be chain family agnostic (i.e.
 
 - **Previous audits:**  None made public
 - **Documentation:** https://docs.chain.link/ccip
-  * Please see the [Documentation File](https://github.com/code-423n4/2024-11-chainlink/blob/main/CCIP%201.6%20Documentation.pdf)
+  * Please see the [Documentation File](https://github.com/code-423n4/2024-11-chainlink/blob/main/CCIP%201.6%20Documentation.%20-%20CCIP%20-%20Confluence.pdf)
 - **Website:** https://chain.link/
 - **X/Twitter:** https://twitter.com/chainlink
 - **Discord:** https://chain.link/discord
