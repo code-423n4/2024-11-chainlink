@@ -209,7 +209,7 @@ None
 - Nonce ordering not honoured
 - Nonce ordering leading to stuck messages
 - Multi-source batch getting stuck (one source blocking another)
-- Unintentional interactions between 1.5 self-serve pools and V2 multi-ramps
+- Unintentional interactions between 1.5 self-serve pools and V1.6 multi-ramps
 - Over/under payment / billing bugs
 - Wasting NOP gas, leading to losses for NOPs
 - Unrecoverable states in the CCIPConfig state transitions
