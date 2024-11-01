@@ -211,6 +211,7 @@ Prerequisites:
 
 ```bash
 git clone --recurse https://github.com/code-423n4/2024-11-chainlink.git
+cd 2024-11-chainlink
 foundryup --version nightly-3ff3d0562215bca620e07c5c4c154eec8da0f04b
 forge test
 ```
