@@ -82,7 +82,7 @@ NOTE: Token pools are out of scope for this audit. Their effects on the on/offRa
 * Stale prices can be used from the FeeQuoter in some circumstances, as clearly defined in the code.
 * There's increased risk of rounding errors when working with tokens with >36 decimals in the FeeQuoter.
 
-
+* **Please note: where the docs and code conflict, the code should be taken as source of truth.**
 # Overview
 
 Chainlink CCIP is a cross-chain messaging protocol with native support for token transfers and security in depth. You can reference our [public docs](https://docs.chain.link/ccip/) for more background information.
@@ -112,26 +112,27 @@ The contracts in scope for this audit are both the ramps and all of their helper
 ### Files in scope
 | Contract                                                                                                                                             |   SLOC   | Purpose                         |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- |:--------:|:------------------------------- |
-| [src/ccip/FeeQuoter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/FeeQuoter.sol)                                           |   527    | Contains all fee logic          |
-| [src/ccip/MultiAggregateRateLimiter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/MultiAggregateRateLimiter.sol)           |   155    | Rate limiter                    |
-| [src/ccip/NonceManager.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/NonceManager.sol)                                     |    83    | Handling nonces                 |
-| [src/ccip/capability/CCIPHome.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/capability/CCIPHome.sol)                       |   310    | Home chain OCR config contract  |
-| [src/ccip/interfaces/IFeeQuoter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IFeeQuoter.sol)                   |    6    | FeeQuoter interface             |
-| [src/ccip/interfaces/IMessageInterceptor.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IMessageInterceptor.sol) |    5     | MessageInterceptor interface    |
-| [src/ccip/interfaces/INonceManager.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/INonceManager.sol)             |    3     | NonceManager interface          |
-| [src/ccip/interfaces/IRMN.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IRMN.sol)                               |    7    | RMN interface                   |
-| [src/ccip/interfaces/IRMNRemote.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IRMNRemote.sol)                   |    8    | RMNRemote interface             |
-| [src/ccip/libraries/Client.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/libraries/Client.sol)                             |    36    | Customer facing library         |
-| [src/ccip/libraries/Internal.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/libraries/Internal.sol)                         |   150    | Internal library                |
-| [src/ccip/ocr/MultiOCR3Base.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/ocr/MultiOCR3Base.sol)                           |   178    | OCR3 base contract              |
-| [src/ccip/offRamp/OffRamp.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/offRamp/OffRamp.sol)                               |   571    | Main destination chain contract |
-| [src/ccip/onRamp/OnRamp.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/onRamp/OnRamp.sol)                                   |   305    | Main source chain contract      |
-| [src/ccip/rmn/RMNHome.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/rmn/RMNHome.sol)                                       |   194    | RMN contract on the home chain  |
-| [src/ccip/rmn/RMNRemote.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/rmn/RMNRemote.sol)                                   |   159    | RMN contract on each chain      |
+| [contracts/src/ccip/FeeQuoter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/FeeQuoter.sol)                                           |   527    | Contains all fee logic          |
+| [contracts/src/ccip/MultiAggregateRateLimiter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/MultiAggregateRateLimiter.sol)           |   155    | Rate limiter                    |
+| [contracts/src/ccip/NonceManager.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/NonceManager.sol)                                     |    83    | Handling nonces                 |
+| [contracts/src/ccip/capability/CCIPHome.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/capability/CCIPHome.sol)                       |   310    | Home chain OCR config contract  |
+| [contracts/src/ccip/interfaces/IFeeQuoter.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IFeeQuoter.sol)                   |    6    | FeeQuoter interface             |
+| [contracts/src/ccip/interfaces/IMessageInterceptor.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IMessageInterceptor.sol) |    5     | MessageInterceptor interface    |
+| [contracts/src/ccip/interfaces/INonceManager.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/INonceManager.sol)             |    3     | NonceManager interface          |
+| [contracts/src/ccip/interfaces/IRMN.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IRMN.sol)                               |    7    | RMN interface                   |
+| [contracts/src/ccip/interfaces/IRMNRemote.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/interfaces/IRMNRemote.sol)                   |    8    | RMNRemote interface             |
+| [contracts/src/ccip/libraries/Client.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/libraries/Client.sol)                             |    36    | Customer facing library         |
+| [contracts/src/ccip/libraries/Internal.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/libraries/Internal.sol)                         |   150    | Internal library                |
+| [contracts/src/ccip/ocr/MultiOCR3Base.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/ocr/MultiOCR3Base.sol)                           |   178    | OCR3 base contract              |
+| [contracts/src/ccip/offRamp/OffRamp.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/offRamp/OffRamp.sol)                               |   571    | Main destination chain contract |
+| [contracts/src/ccip/onRamp/OnRamp.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/onRamp/OnRamp.sol)                                   |   305    | Main source chain contract      |
+| [contracts/src/ccip/rmn/RMNHome.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/rmn/RMNHome.sol)                                       |   194    | RMN contract on the home chain  |
+| [contracts/src/ccip/rmn/RMNRemote.sol](https://github.com/code-423n4/2024-11-chainlink/blob/main/src/ccip/rmn/RMNRemote.sol)                                   |   159    | RMN contract on each chain      |
 | **Total**                                                                                                                                            | **2697** |                                 |
 
 ### Files out of scope
 Any files not listed above are OOS.
+
 
 ## Scoping Q &amp; A
 
