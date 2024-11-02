@@ -75,11 +75,11 @@ NOTE: Token pools are out of scope for this audit. Their effects on the on/offRa
 * Partial token price updates may block other price updates
   * When this happens, the offchain code will re-submit prices for the price updates that have become stale.
 * Potential execution of ordered messages out of order through reentrancy pattern
-  * When a messages with nonces `n` and `n+1` are UNTOUCHED but the execution DON has not executed them for the entire `permissionLessExecutionThresholdSeconds`, they become executable.
-  * When reentrancy is in the execution of `n` to execute `n+1`, the ExecutionStateChanged event will be emitted in the order `n+1` and then `n`. 
-* When setting `permissionLessExecutionThresholdSeconds` there is an increased risk of MEV extraction.
+  * When messages with nonces `n` and `n+1` are UNTOUCHED but the execution DON has not executed them for the entire `permissionLessExecutionThresholdSeconds`, they become executable.
+  * When reentrancy is used in the execution of `n` to execute `n+1`, the ExecutionStateChanged event will be emitted in the order `n+1` and then `n`. 
+* When setting `permissionLessExecutionThresholdSeconds` to zero there is an increased risk of MEV extraction.
 * Stale prices can be used from the FeeQuoter in some circumstances, as clearly defined in the code.
-* There's increased risk of rounding errors when working with tokens with >36 decimals in the FeeQuoter.
+* There's an increased risk of rounding errors when working with tokens with >36 decimals in the FeeQuoter.
 
 * **Please note: where the docs and code conflict, the code should be taken as source of truth.**
 
