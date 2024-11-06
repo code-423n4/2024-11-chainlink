@@ -12,6 +12,14 @@
 - Starts November 1, 2024 20:00 UTC
 - Ends November 25, 2024 20:00 UTC
 
+**Note re: risk level upgrades/downgrades**
+
+Two important notes about judging phase risk adjustments for this audit: 
+- High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+- Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.
+
+As such, wardens are encouraged to select the appropriate risk level carefully during the submission phase.
+
 ## Automated Findings / Publicly Known Issues
 
 _Note for C4 wardens: Anything included in this `Automated Findings / Publicly Known Issues` section is considered a publicly known issue and is ineligible for awards._
