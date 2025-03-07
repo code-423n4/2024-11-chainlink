@@ -1,0 +1,682 @@
+==============================================================
+Guild: Code4rena
+Channel: ARCHIVE-PUBLIC / chainlink-nov1
+==============================================================
+
+[10/28/2024 21:11] itsmetechjay (pinned)
+👋 Hello and welcome to the audit channel for the **$235,000 in USDC Chainlink** audit!
+
+📆 Audit opens Friday, 01 November 2024 20:00 (20:00 UTC) and runs through Monday, 25 November 2024 20:00 (20:00 UTC) (24 days).
+
+Please give a warm welcome to the Chainlink team, particularly @Ryan | Chainlink, @Rens | Chainlink Labs, @Suryansh | Chainlink Labs, @Josh | Chainlink Labs and @Evaldas | Chainlink Labs who will be available for questions either here in the channel or via a PRIVATE thread in the CET timezone primarily (with some US coverage). 
+
+🤖 **Documentation bot assistance:** For general questions about the codebase, give our documentation bot a try, by tagging `@Docs Wolf` in any thread (private or public) and asking your question. The bot will make its best attempt to answer based on the codebase and documentation, and link you to relevant resources.  
+
+We'll be posting relevant links, documentation, etc. here, so if you intend to participate in this audit, consider enabling notifications for this channel. 🐺 ⏰
+
+Audit Page: https://code4rena.com/audits/2024-11-chainlink
+
+
+[11/01/2024 20:15] itsmetechjay
+you'll need to open a private or public thread with Docs Wolf to get a response
+
+
+[11/01/2024 20:15] abu_turaab
+Ohh, okay.
+
+
+[11/01/2024 20:46] zxriptor
+did I miss code walk-through? is there a link?
+
+
+[11/01/2024 21:03] kartoonjoy
+It needed to be cancelled actually.
+
+
+[11/01/2024 21:14] zxriptor
+oh, ok. did the date changed or no walk-through at all?
+
+
+[11/01/2024 21:25] kartoonjoy
+No, none. It's cancelled.
+
+
+[11/01/2024 21:25] kartoonjoy
+Pinned a message.
+
+
+[11/02/2024 17:16] cllccip (pinned)
+Could everyone please name the private threads starting with your own name? That makes it a lot easier for us to find you!
+
+{Reactions}
+✅ (6) 
+
+[11/02/2024 18:28] cllccip (pinned)
+We will not be answering questions related to prior audits. That should not be relevant for this contest
+
+
+[11/02/2024 18:35] itsmetechjay
+Pinned a message.
+
+
+[11/02/2024 18:35] itsmetechjay
+Pinned a message.
+
+
+[11/03/2024 03:04] tamayonft
+question are only througth private threads?
+
+
+[11/03/2024 05:23] thisvishalsingh
+What are major changes after the codehaks audit?
+
+
+[11/03/2024 07:34] cllccip
+No, only questions that are too sensitive for the main channel as they directly relate to a (potential) finding. I highly encourage people to ask questions in the main channel
+
+
+[11/03/2024 07:35] cllccip
+Have you read the docs? The pdf should answer your question
+
+{Reactions}
+👍 (2) 
+
+[11/03/2024 08:37] bronze_pickaxe
+- `NOTE: not all exotic chains have been taking into consideration when designing CCIP. There will inevitably be chains that won't work. Findings are judged on how realistic it would be for CCIP to expand to that chain.`
+
+Which exotic, non-EVM chains have been taking into consideration when designing CCIP(other than Solana) & what metric will be used to judge how realistic it is for CCIP to expand to that chain?
+
+
+[11/03/2024 09:53] cllccip
+This is mostly to guard against people coming up with chains with zero volume/market cap that just happen to have some large change we cannot accommodate with the current code. Market cap is not an ideal predictor but it might be the best we have. Anything in the top 100 with a functional smart contract system should be possible. Probably also the top 200 but I have not explicitly checked those chains.
+
+
+[11/03/2024 09:55] bronze_pickaxe
+Thank you.
+
+
+[11/04/2024 10:59] cllccip (pinned)
+Please use private threads and not DMs 🙂 and be sure to include all of us to have better timezone coverage on your questions!
+
+{Reactions}
+☝️ 
+
+[11/04/2024 11:36] kartoonjoy
+Pinned a message.
+
+
+[11/04/2024 17:50] underdog_sec
+Has the introduction of blobs in L2's been considered in `_getDataAvailabilityCost` computations? I'm curious as [Fjord upgrade in OP](https://docs.optimism.io/stack/transactions/fees#fjord), for example particulary changes a lot txn fee estimation. I'm just wondering if this is a known issue that is addressed by changing configurations.
+
+
+[11/04/2024 17:50] ryanrhall
+We are aware of the Fjord upgrade! Our system is flexible enough that we can usually handle various hard-forks with simple config changes. See [config struct here](https://github.com/smartcontractkit/chainlink/blob/bfd9a3ffe11484f3dc413bb77a709f2c4bb281b0/contracts/src/v0.8/ccip/FeeQuoter.sol#L92:L111). FWIW we don't have to perfectly model the chain's tx fee model and in most cases we're happy just to simplify and overestimate. As long as it's not subject to abuse!
+
+{Reactions}
+👍 (4) 
+
+[11/05/2024 08:27] cllccip
+FYI these are the chains we're live on as a minimal set of chains that are very much in scope! https://docs.chain.link/ccip/directory/mainnet
+
+
+[11/05/2024 08:28] cllccip
+This includes chains where we're only on testnet, like Soneium
+
+
+[11/05/2024 10:40] tim_peng.
+Started a thread.
+
+
+[11/05/2024 19:09] 0xdanielc
+wait what is docs wolf? is it the code4rena version of hawk where I ask it my dumb questions instead of wasting the time of a real person?
+
+
+[11/05/2024 19:19] mrpotatomagic
+Started a thread.
+
+
+[11/07/2024 12:05] underdog_sec
+Are transmitters considered trusted? I see they're not mentioned in the "All trusted roles in the protocol" section in the README
+
+
+[11/07/2024 12:30] cllccip
+Up to f nodes can be malicious, since transmitters are nodes, some transmitters could be malicous
+
+{Reactions}
+👍 
+
+[11/07/2024 12:40] 0x391
+Is `CCIPHome::i_capabilitiesRegistry` deployed somewhere? or which file in the repository is for that interface?
+
+
+[11/07/2024 12:42] cllccip
+Keystone code can be found here https://github.com/smartcontractkit/chainlink/tree/develop/contracts/src/v0.8/keystone, this includes the Capability Registry and the keystone price update logic
+
+{Reactions}
+🫡 (2) 
+
+[11/07/2024 12:52] kalogerone
+is there a github of the existing ccip deployed code?
+
+
+[11/07/2024 12:59] cllccip
+This is 1.5, do note that we started development on 1.6 so there's (older versions of) 1.6 contracts in there as well https://github.com/smartcontractkit/ccip/releases/tag/v2.14.0-ccip1.5.0
+
+{Reactions}
+🙏 
+
+[11/07/2024 14:57] 0x41653
+will the protocol deploy the smart contract to blast?
+
+
+[11/07/2024 14:58] 0x41653
+Sorry
+
+
+[11/07/2024 14:58] 0x41653
+never mind
+
+
+[11/07/2024 14:58] 0x41653
+Ethereum, Arbitrum, Avax, Base, BSC, Optimism, Polygon, zkSync, Other any and all EVM chains. Some chains require special configs (like setting OOO to be enforced). There is no guarantee that every chain that claims to be EVM is supported by the current contracts.
+
+
+[11/07/2024 15:00] cllccip
+Live on Blast right now! https://docs.chain.link/ccip/directory/mainnet/chain/ethereum-mainnet-blast-1
+
+{Reactions}
+💯 
+
+[11/07/2024 15:16] 0x41653
+Ty, the documentation is goooood... https://github.com/smartcontractkit/documentation
+
+{Reactions}
+❤️ (3) 
+
+[11/08/2024 16:34] irving6969
+Is Kyc required for payout?
+
+
+[11/08/2024 17:29] kartoonjoy
+Started a thread.
+
+
+[11/09/2024 18:10] .boy2000
+How this audit overlaps with immunefi bug bounty? In scope contracts are very similar <https://github.com/smartcontractkit/ccip/tree/ccip-develop/contracts/src/v0.8/ccip>. Can applicable bugs also be submitted there?
+
+
+[11/09/2024 20:06] cllccip
+There is no overlap between contracts in scope for C4 and those in scope for Immunifi. Submit findings for any code in scope of C4 to C4
+
+
+[11/10/2024 14:02] tamayonft
+where did you get this bro?
+
+
+[11/10/2024 15:25] 0xdanielc
+@Jorgect maybe from here, i might be wrong though as I'm a newbie that can never find anything https://docs.chain.link/ccip/directory/mainnet
+
+{Embed}
+https://docs.chain.link/ccip/directory/mainnet
+Chainlink Documentation | Chainlink Documentation
+Access real-time information and operational statuses for Chainlink Cross-Chain Interoperability Protocol (CCIP) networks, lanes, and tokens.
+Code4rena - ARCHIVE-PUBLIC - chainlink-nov1 [1298019840845676624].txt_Files/ccip-directory-22594.jpg
+
+
+[11/11/2024 11:14] cllccip (pinned)
+I've seen this question many times: you do NOT have to execute all messages in a root. You can execute any subset you want
+
+
+[11/11/2024 11:15] cllccip
+Please check the Merkle multi proof lib for the logic behind it
+
+{Reactions}
+➕ (5) 
+
+[11/11/2024 13:20] kartoonjoy
+Pinned a message.
+
+
+[11/12/2024 10:40] cllccip
+Even though we increased the max number of nodes from 32 to 256, that does *not* mean we will suddenly increase the number of signers significantly. We currently require 6 signatures (f+1, f = 5, nodes = 16, nodes = 3f+1), this will not suddenly grow to be >32 (which would not fit in the `v` section of the signatures). This would be prohibitively expensive as each sig costs ~7.2k gas. Therefore the max range of the `v`s is not a concern
+
+{Reactions}
+👍 (3) 
+
+[11/13/2024 06:45] mussucal
+Started a thread.
+
+
+[11/22/2024 14:57] cllccip (pinned)
+We're entering the last few days of the contest. Please note that there can be a longer delay than normal when asking questions during the weekend. Try not to wait until the last minute!
+
+
+[11/22/2024 15:34] itsmetechjay
+Pinned a message.
+
+
+[11/24/2024 10:35] 0xswahili
+Hi. Anybody else unable to compile the contracts using these instructions:
+
+```solidity
+git clone --recurse https://github.com/code-423n4/2024-11-chainlink.git
+cd 2024-11-chainlink
+foundryup --version nightly-3ff3d0562215bca620e07c5c4c154eec8da0f04b
+forge test
+```
+I've even tried using profile.lite but it crashes completely
+
+
+[11/24/2024 11:56] mrmorningstar96
+I have that issue to
+
+
+[11/24/2024 16:29] tamayonft
+If the ccpi 1.5 will be working on parallel with new one?
+
+
+[11/25/2024 07:23] cllccip
+There will be a period where both systems would operate at the same time. There is always one version active per lane though. So e.g. lanes to/from chain X already run 1.6 but others still run 1.5.
+
+
+[11/25/2024 08:47] 0xswahili
+@Rens | Chainlink Labs Any help on this...
+
+
+[11/25/2024 08:50] eme0242
+I thought I saw an announcement that medium bugs downgraded to low will not be elligible for rewards 
+is that correct?
+
+
+[11/25/2024 08:51] cllccip
+Just used the commands from the readme for a completely clean pull and compile. I experienced no issues.
+
+
+[11/25/2024 08:59] eme0242
+yeah
+it's on the contest readme
+
+
+[11/25/2024 09:01] eme0242
+My question is, what if a warden submits an issue as a low and a medium(changing the structure and words in both reports), how will that be handled or judged?
+
+{Reactions}
+🧠 (2) 
+
+[11/25/2024 09:34] eme0242
+Title: Warden can escape penalty for incorrect risk categorization
+
+Severity: HIGH
+
+Impact: Warden will get rewards that he should not be elligible for
+
+POC: Mainnet will be live in 9 hrs, unexploitable until then
+
+Vulnerability details: Due to the rule in contest readme that "High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported.", a warden can submit same issue as both a low and a medium(using different phrasing).
+If the correct severity is low/medium, one of his reports becomes valid, while the other invalid.
+Two wardens can collab to make it untraceable to a single warden.
+
+Recommendation: Please remove the rule🥹
+
+{Reactions}
+😂 (11) 🥹 👌 
+
+[11/25/2024 09:39] bigsam0831
+Check bypass. Sponsor confirmed. Satisfactory
+
+{Reactions}
+😂 (3) 
+
+[11/25/2024 11:10] cloudellie
+GM - let's move this discussion to #🐺・wardens. Happy to continue the conversation there.
+
+
+[11/25/2024 12:28] cloudellie
+For clarity, this upgrade/downgrade constraint is not specific to Chainlink's audit; it is a C4-wide rule that affects most audits that started on or after November 1.
+
+
+[11/25/2024 20:02] C4
+**🚨 AUDIT ALERT**
+
+@🐺Wardens The **Chainlink** audit is now closed! Huge thanks to everyone who participated 🔍, whether you submitted a finding or not.
+
+What's next: The sponsor team and judge will review the findings over the next couple of weeks.
+
+
+[11/26/2024 09:32] mrmorningstar96
+how many findings are submitted?
+
+
+[11/26/2024 10:39] cllccip
+>= 0
+
+{Reactions}
+💯 (8) 😂 (13) 🫡 (2) 
+
+[11/26/2024 16:28] 0xtraub
+type(uint256).max
+
+{Reactions}
+🤯 (4) 
+
+[12/04/2024 14:28] tamayonft
+where can we se validation work?
+
+
+[12/04/2024 14:29] itsmetechjay
+See here: https://discord.com/channels/810916927919620096/1311027841189548173/1313442147965337680
+
+
+[12/05/2024 06:37] mmsaki
+private channel?
+
+
+[12/05/2024 07:16] cloudellie
+You’d need to have the SR role to view submissions at this stage.
+
+
+[12/05/2024 08:08] mmsaki
+how do i an SR role?
+
+
+[12/05/2024 09:33] cloudellie
+that's outlined here: https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+
+{Embed}
+https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+Security Researcher role (formerly +backstage wardens) | Code4rena
+
+{Reactions}
+👍🏽 
+
+[12/09/2024 07:09] juggernaut63
+will this be finished before christmas?
+
+{Reactions}
+➕ 
+
+[12/10/2024 12:33] mmsaki
+Hey @CloudEllie, this was my first submission. Also, so basically new SR's are not able to view submissions or check mitigation process until the rewards are done? How do you handle escalations for new SR's?
+
+
+[12/10/2024 12:37] cloudellie
+That's correct. Escalation privileges are earned through performance across multiple audits.
+
+{Reactions}
+👍🏽 (2) 
+
+[12/12/2024 21:07] tamayonft
+How can scalate a issue inside c4?
+
+
+[12/12/2024 21:08] tamayonft
+I just know when we scalate on github
+
+
+[12/12/2024 21:11] itsmetechjay
+If you are an SR warden, you can leave a comment on the submission during the Post-Judging QA period. Instructions for the Chainlink audit were posted here: https://discord.com/channels/810916927919620096/1166686843421593631/1316816181474103317
+
+
+[12/12/2024 21:12] tamayonft
+Thanks jay
+
+{Reactions}
+hi5 
+
+[12/14/2024 13:34] coffiasd
+Issues that are downgraded from M to L  will become ineligible for rewards now ?
+
+
+[12/14/2024 13:35] coffiasd
+@CloudEllie
+
+
+[12/14/2024 14:20] itsmetechjay
+Correct:
+> High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+
+{Reactions}
+✅ (4) 
+
+[12/17/2024 17:59] oblivionis_30694
+Any update?👀
+
+
+[12/17/2024 20:09] princekay145
+tired of waiting fr..
+
+{Reactions}
+🫠 (5) 
+
+[12/20/2024 14:34] ladboy233
+This year?
+
+{Reactions}
+🔥 
+
+[12/21/2024 07:03] t1moh
+Thought you don't compete anymore, nice to see you!
+
+
+[12/21/2024 07:15] bytes032
+soon also gz
+
+
+[12/21/2024 08:25] cllccip
+Oh he sure competed! You'll see very soon 🚀
+
+{Reactions}
+🚀 (3) 
+
+[12/23/2024 12:09] drynooo
+Is the chainlink team already on leave? Will there be results before Christmas?
+
+{Reactions}
+🥲 (4) 
+
+[12/29/2024 11:13] juggernaut63
+https://tenor.com/view/mr-bean-mrbean-bean-mr-bean-holiday-mr-bean-holiday-movie-gif-11625313334009911234
+
+{Embed}
+https://tenor.com/view/mr-bean-mrbean-bean-mr-bean-holiday-mr-bean-holiday-movie-gif-11625313334009911234
+Code4rena - ARCHIVE-PUBLIC - chainlink-nov1 [1298019840845676624].txt_Files/mr-bean-mrbean-3802C.png
+
+{Reactions}
+👀 (3) 
+
+[01/02/2025 19:16] itsmetechjay
+🤑 🎉  Awards for **Chainlink CCIP**:
+
+$63,954.54 USDC » @0xladboy 
+$51,772.72 USDC » @Drynooo 
+$51,772.72 USDC » @0xRobocop 
+$3,315.79 USDC » @shaflow2 
+$2,210.53 USDC » @ether_sky 
+$1,473.68 USDC » @Sparrow 
+
+🏁 Findings summary
+--------------------------------------—
+1 Med risk finding
+110 wardens contributed
+
+Top Hunters: ladboy233, Drynooo, 0xRobocop
+Top Gatherers: ladboy233, Drynooo, 0xRobocop
+Top QA report: shaflow2
+
+Awards will be distributed on Polygon within the next week. Congratulations all!  💸 💸 💸
+
+⚠️ Awardees, be sure to [complete your tax reporting info](https://docs.code4rena.com/awarding/incentive-model-and-awards/awarding-process#tax-information-for-code4rena-contributors-wardens-judges-etc) if you haven't already. This must be completed within 30 days (i.e. before Sunday, 02 February 2025) to receive your award distribution for this audit.
+
+❗Friendly reminder that as this was a private audit, all details regarding results and findings are confidential. Please no discussions regarding the content of findings whatsoever.
+
+Also, the leaderboard will be updated with these audit results at a later date.
+
+{Reactions}
+💜 (7) 👏 (12) 🙌 (3) 🔥 (2) 
+
+[01/02/2025 21:21] brivan
+@0xladboy GG
+
+{Reactions}
+👍 (4) 
+
+[01/02/2025 21:35] irving6969
+congratz @Drynooo
+
+{Reactions}
+🎉 (3) 
+
+[01/03/2025 12:39] cloudellie
+@0xladboy @Drynooo @0xRobocop congrats, sers!
+
+{Reactions}
+🫡 (4) 
+
+[01/03/2025 13:33] 0xhuntoor
+no cards for this?
+
+
+[01/03/2025 14:42] thebrittfactor
+Since the final details and results of the audit are to remain confidential, we opted out of warden cards for this audit.
+
+{Reactions}
+👍 (2) thankyou (3) 
+
+[01/03/2025 16:22] melanie_1034
+So I have a question about high or downgraded grading:
+
+"
+High- or Medium-risk submissions downgraded to Low-risk (QA)) will be ineligible for awards.
+Upgrading a Low-risk finding from a QA report to a Medium- or High-risk finding is not supported."
+
+
+So does this mean, if I find a medium severity but the warden thinks its a high vulnerability I will get paid for a medium severity? or not get paid at all?
+
+Im sure this makes alot of people hesitant on participating in contests
+
+
+[01/03/2025 16:47] cloudellie
+If you submit a finding as a Medium and it is upgraded to High, the finding will be awarded as a High.
+
+
+[01/03/2025 16:49] cloudellie
+That note applies to findings that are either:
+- submitted as High/Medium but downgraded to Low, or
+- submitted as Low (i.e. as part of a QA report), but another warden reported the same issue as a High or Medium and it was judged to be valid (i.e. the Low submission will not be upgraded and marked as a duplicate of the HM finding).
+
+{Reactions}
+🥲 
+
+[01/03/2025 20:42] eme0242
+Congrats @0xladboy @Drynooo @0xRobocop 🎉
+
+{Reactions}
+🫡 (4) 
+
+[01/04/2025 14:21] y0ng0p3
+For Low submissions that are duplicates of H/M, are they awarded as Low or not awarded at all?
+
+
+[01/04/2025 14:47] cloudellie
+Lows are typically only awarded if they’re part of a winning (top 3) QA report.
+
+{Reactions}
+👍 
+
+[01/05/2025 09:35] shealtielanz
+Congrats @0xladboy @0xRobocop @Drynooo 🎉
+Can’t wait to see you guys in future contests 🫡🚀
+
+{Reactions}
+👍 (3) 
+
+[01/06/2025 10:13] cheatc0d3
+Hi did PJQA reports get reviewed some are still marked as needs review?
+
+
+[01/06/2025 10:15] cloudellie
+Can you clarify what you mean by "PJQA reports"? 
+
+"Needs review" usually refers to customer input, which is optional -- but the validator and judge review every QA report.
+
+
+[01/06/2025 10:20] cheatc0d3
+Oh I meant reports that wardens raised disputes during pjqa ..for example my reports f87 and f86 shows needs triage and needs review but marked invalid on judge end..was decision final that these are invalid?
+
+
+[01/06/2025 10:43] cloudellie
+Would you mind submitting a help desk request for this so we can look into it? I'd like to review but am worried it'll get lost in my Discord notifications. Thanks 🙏
+
+
+[01/06/2025 10:57] cheatc0d3
+Okay 👍
+
+{Reactions}
+thankyou 
+
+[01/06/2025 12:26] mang0.eth
+@CloudEllie  hello  。Why is there no feedback on what I submitted? My registered name on code4rena is Mang0
+
+
+[01/06/2025 13:09] aycozy
+congratulations to the winners:skeletorfabulous: .        please when report??
+
+
+[01/06/2025 13:26] mang0.eth
+@CloudEllie I want to know if my report is valid and how long do I have to wait for feedback?
+
+
+[01/06/2025 13:26] mang0.eth
+thanks
+
+
+[01/06/2025 13:33] cloudellie
+If you don't see your username among the list of award recipients, then your submission was not accepted for awarding. 
+
+As noted in the award announcement: 
+
+> as this was a private audit, all details regarding results and findings are confidential. 
+
+With most C4 audits, wardens can view discussion on their submissions when the report is made public, but for this audit all submissions are being kept private.
+
+
+[01/07/2025 03:17] mang0.eth
+ok thanks。 @CloudEllie  how can i get a sr role？
+
+
+[01/07/2025 14:31] cloudellie
+The requirements are outlined here: https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+
+But currently certified contributor applications are closed. I'm hoping to make an announcement in the coming weeks on this subject, it's taking longer than expected.
+
+{Embed}
+https://docs.code4rena.com/roles/certified-contributors/sr-backstage-wardens
+Security Researcher role (formerly +backstage wardens) | Code4rena
+
+
+[02/07/2025 01:40] ligth0418
+I have a problem. I wanna see the content of revokeRole() function. who can help me?
+
+
+[02/07/2025 03:04] zmj4107
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/AccessControl.sol
+
+{Embed}
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/AccessControl.sol
+openzeppelin-contracts/contracts/access/AccessControl.sol at master...
+OpenZeppelin Contracts is a library for secure smart contract development. - OpenZeppelin/openzeppelin-contracts
+Code4rena - ARCHIVE-PUBLIC - chainlink-nov1 [1298019840845676624].txt_Files/openzeppelin-contracts-9DF43
+
+
+[02/24/2025 15:41] itsmetechjay
+ℹ️ This channel is pending archive.   As a result, any private threads will be permanently deleted in 03/07/2025 15:39. Please make sure to grab anything you might need before then.
+
+
+[03/06/2025 23:59] itsmetechjay
+ℹ️ Reminder: this channel will be deleted after 24 hours.
+
+
+==============================================================
+Exported 123 message(s)
+==============================================================
